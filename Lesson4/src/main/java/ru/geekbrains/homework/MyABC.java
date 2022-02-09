@@ -2,7 +2,7 @@ package ru.geekbrains.homework;
 
 public class MyABC {
     static final Object mon = new Object();
-    static volatile int currentNum = 1;
+    static volatile String str = "A";
     static final int num = 5;
 
     public static void main(String[] args) {
@@ -10,11 +10,11 @@ public class MyABC {
             try {
                 for (int i = 0; i < num; i++) {
                     synchronized (mon) {
-                        while (currentNum!=1) {
+                        while (!str.equals("A")) {
                             mon.wait();
                         }
-                        System.out.print("A");
-                        currentNum = 2;
+                        System.out.print(str);
+                        str = "B";
                         mon.notifyAll();
                     }
                 }
@@ -27,11 +27,11 @@ public class MyABC {
             try {
                 for (int i = 0; i < num; i++) {
                     synchronized (mon) {
-                        while (currentNum!=2) {
+                        while (!str.equals("B")) {
                             mon.wait();
                         }
-                        System.out.print("B");
-                        currentNum = 3;
+                        System.out.print(str);
+                        str = "C";
                         mon.notifyAll();
                     }
                 }
@@ -44,11 +44,11 @@ public class MyABC {
             try {
                 for (int i = 0; i < num; i++) {
                     synchronized (mon) {
-                        while (currentNum!=3) {
+                        while (!str.equals("C")) {
                             mon.wait();
                         }
-                        System.out.print("C");
-                        currentNum = 1;
+                        System.out.print(str);
+                        str = "A";
                         mon.notifyAll();
                     }
                 }
