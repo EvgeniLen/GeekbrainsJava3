@@ -29,9 +29,11 @@ public class Car implements Runnable{
             MainClass.getCb().await();
             System.out.println(this.name + " готов");
             MainClass.getCdlStart().countDown();
+            MainClass.getCb().await();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
