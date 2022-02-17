@@ -20,7 +20,7 @@ public class MyMain {
             Method beforeSuiteMethod = null;
             int countAfter = 0;
             int countBefore = 0;
-            Set<Integer> priority = new TreeSet<>();
+            Set<Integer> priority = new TreeSet<>(Comparator.reverseOrder());
 
             for (Method method : methods) {
                 if (method.isAnnotationPresent(AfterSuite.class)) {
